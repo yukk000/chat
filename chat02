@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>チャット</title>
+ <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="" crossorigin="anonymous"></script>
+</head>
+<body>
+<script>
+    var socket = io();
+    var app = new Vue({
+      el: '#chat',
+      data: {
+        chatMessage: '',
+        messages: []
+      },
+      methods: {
+    
+        postMessage: function() {
+          socket.emit('', this.chatMessage);
+          this.chatMessage = '';
+          return false;
+        }
+      },
+    })
+    socket.on('', function(msg) {
+      console.log(msg);
+      app.messages.push(msg);
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+    socket.on('init-chat', function(messages) {
+      app.messages = messages;
+    });
+  </script>
+</body>
+</html>
